@@ -5,6 +5,4 @@ const homeSchema = new mongoose.Schema({
   price: Number,
 });
 
-const Home = mongoose.model('Home', homeSchema);
-
-module.exports = Home;
+module.exports = mongoose.model('Home', homeSchema);

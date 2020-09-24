@@ -12,14 +12,12 @@ const reviewSchema = new mongoose.Schema({
 });
 
 const lenderSchema = new mongoose.Schema({
-  name: Number,
-  phone: String,
-  zip_code: Number,
+  name: String,
   favorite: Boolean,
   offerings: [offeringSchema],
   reviews: [reviewSchema],
 });
 
-const Lender = mongoose.model('Home', lenderSchema);
+const Lender = mongoose.model('Lender', lenderSchema);
 
 module.exports = Lender;
