@@ -1,10 +1,15 @@
 const express = require('express');
 const path = require('path');
+const mongoose = require('mongoose');
 const homes = require('./routes/homes');
 const lenders = require('./routes/lenders');
 
 const app = express();
 const port = 5000;
+
+// Connect to DB
+mongoose.connect('mongodb://localhost/affordability', { useNewUrlParser: true })
+  .then(() => console.log('Connected to the database...'));
 
 // Serve Client
 app.use(express.static(path.join(__dirname, '../client', 'dist')));
