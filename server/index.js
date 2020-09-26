@@ -8,7 +8,7 @@ const app = express();
 const port = 5000;
 
 // Connect to DB
-mongoose.connect('mongodb://localhost/affordability', { useNewUrlParser: true })
+mongoose.connect('mongodb://localhost/affordability', { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to the database...'));
 
 // Serve Client

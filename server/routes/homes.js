@@ -34,7 +34,7 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  Home.findOneAndUpdate({ home_id: req.params.id }, req.body, { upsert: true, new: true })
+  Home.findOneAndUpdate({ home_id: req.params.id }, req.body, { new: true })
     .then((updatedHome) => {
       res.status(200).send(updatedHome);
     })
