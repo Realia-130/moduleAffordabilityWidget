@@ -24,8 +24,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const { home_id } = req.body;
-  Home.findOneAndUpdate({ home_id }, req.body, { upsert: true, new: true })
+  Home.findOneAndUpdate({ home_id: req.body.home_id }, req.body, { upsert: true, new: true })
     .then((newHome) => {
       res.status(200).send(newHome);
     })
