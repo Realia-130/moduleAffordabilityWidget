@@ -4,11 +4,23 @@ const Home = require('../../models/home.js');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.send('Getting homes...');
+  Home.find()
+    .then((results) => {
+      res.status(200).send(results);
+    })
+    .catch((error) => {
+      res.status(400).send(error);
+    });
 });
 
 router.get('/:id', (req, res) => {
-  // TODO..
+  Home.findOne({ home_id: req.params.id })
+    .then((results) => {
+      res.status(200).send(results);
+    })
+    .catch((error) => {
+      res.status(400).send(error);
+    });
 });
 
 router.post('/', (req, res) => {
