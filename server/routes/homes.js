@@ -35,12 +35,23 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  // TODO..
+  Home.findOneAndUpdate({ home_id: req.params.id }, req.body, { upsert: true, new: true })
+    .then((updatedHome) => {
+      res.status(200).send(updatedHome);
+    })
+    .catch((error) => {
+      res.status(400).send(error);
+    });
 });
 
 router.delete('/:id', (req, res) => {
-  // TODO..
+  Home.deleteOne({ home_id: req.params.id })
+    .then((results) => {
+      res.status(200).send(results);
+    })
+    .catch((error) => {
+      res.status(400).send(error);
+    });
 });
-
 
 module.exports = router;
