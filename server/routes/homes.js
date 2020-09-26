@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   Home.find()
-    .then((results) => {
-      res.status(200).send(results);
+    .then((homes) => {
+      res.status(200).send(homes);
     })
     .catch((error) => {
       res.status(400).send(error);
@@ -15,8 +15,8 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   Home.findOne({ home_id: req.params.id })
-    .then((results) => {
-      res.status(200).send(results);
+    .then((home) => {
+      res.status(200).send(home);
     })
     .catch((error) => {
       res.status(400).send(error);
@@ -24,7 +24,14 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  // TODO..
+  const { home_id } = req.body;
+  Home.findOneAndUpdate({ home_id }, req.body, { upsert: true, new: true })
+    .then((newHome) => {
+      res.status(200).send(newHome);
+    })
+    .catch((error) => {
+      res.status(400).send(error);
+    });
 });
 
 router.put('/:id', (req, res) => {
