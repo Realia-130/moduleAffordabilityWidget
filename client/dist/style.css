@@ -62,7 +62,7 @@ input[type=range]::-webkit-slider-runnable-track {
   margin: 0px;
   padding: 0px;
   cursor: default;
-  background: linear-gradient(to right, rgb(0, 120, 130) 0%, rgb(0, 120, 130) 42.318%, rgb(205, 209, 212) 42.318%, rgb(205, 209, 212) 100%);
+  /* background: linear-gradient(to right, rgb(0, 120, 130) 0%, rgb(0, 120, 130) 42.318%, rgb(205, 209, 212) 42.318%, rgb(205, 209, 212) 100%); */
 }
 
 input.range:focus {
