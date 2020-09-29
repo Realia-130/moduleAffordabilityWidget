@@ -1,6 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
+import HomePrice from './HomePrice.jsx';
+import DownPayment from './DownPayment.jsx';
+import InterestRate from './InterestRate.jsx';
 
-const Controls = () => (<div>Controls</div>);
+const ControlsContainer = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  border: 1px soid black;
+`;
+
+const Controls = ({ homePrice }) => (
+  <ControlsContainer>
+    <HomePrice homePrice={homePrice} />
+    <DownPayment />
+    <InterestRate />
+  </ControlsContainer>
+);
 
 export default Controls;

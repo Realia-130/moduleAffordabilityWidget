@@ -5,8 +5,6 @@ import numeral from 'numeral';
 const HeaderContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  //padding: 0 0 0 10px;
-  flex: 1;
 
   h3 {
     margin: 0 0 17px 0;
