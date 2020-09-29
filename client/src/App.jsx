@@ -18,7 +18,7 @@ const App = () => {
   return (
     <AppContainer>
       <Header payment={payment} />
-      <Controls />
+      <Controls homePrice={homePrice} />
       <Display />
     </AppContainer>
   );
