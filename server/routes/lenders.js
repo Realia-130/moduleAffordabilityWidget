@@ -4,23 +4,53 @@ const Lender = require('../../models/lender.js');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.send('Getting lenders...');
+  Lender.find()
+    .then((lenders) => {
+      res.status(200).send(lenders);
+    })
+    .catch((error) => {
+      res.status(400).send(error);
+    });
 });
 
 router.get('/:id', (req, res) => {
-  // TODO..
+  Lender.findOne({ _id: req.params.id })
+    .then((lender) => {
+      res.status(200).send(lender);
+    })
+    .catch((error) => {
+      res.status(400).send(error);
+    });
 });
 
 router.post('/', (req, res) => {
-  // TODO..
+  Lender.findOneAndUpdate({ name: req.body.name }, req.body, { upsert: true, new: true })
+    .then((newLender) => {
+      res.status(200).send(newLender);
+    })
+    .catch((error) => {
+      res.status(400).send(error);
+    });
 });
 
 router.put('/:id', (req, res) => {
-  // TODO..
+  Lender.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
+    .then((updatedLender) => {
+      res.status(200).send(updatedLender);
+    })
+    .catch((error) => {
+      res.status(400).send(error);
+    });
 });
 
 router.delete('/:id', (req, res) => {
-  // TODO..
+  Lender.deleteOne({ _id: req.params.id })
+    .then((results) => {
+      res.status(200).send(results);
+    })
+    .catch((error) => {
+      res.status(400).send(error);
+    });
 });
 
 module.exports = router;
