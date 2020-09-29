@@ -14,8 +14,8 @@ const ControlsContainer = styled.div`
 const Controls = ({ homePrice }) => (
   <ControlsContainer>
     <HomePrice homePrice={homePrice} />
-    <DownPayment />
-    <InterestRate />
+    <DownPayment homePrice={homePrice} />
+    <InterestRate homePrice={homePrice} />
   </ControlsContainer>
 );
 

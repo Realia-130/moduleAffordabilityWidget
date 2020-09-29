@@ -12,8 +12,10 @@ const AppContainer = styled.div`
 `;
 
 const App = () => {
-  const [homePrice, setHomePrice] = useState(1000000);
+  const [homePrice, setHomePrice] = useState(1400000);
   const [payment, setPayment] = useState(homePrice * 0.005);
+
+  if (!homePrice) return (<div>Loading...</div>);
 
   return (
     <AppContainer>
