@@ -1,5 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import Header from './components/Header.jsx';
+import Controls from './components/Controls.jsx';
+import Display from './components/Display.jsx';
 
-const App = () => (<div>Hello World!</div>);
+const AppContainer = styled.div`
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-flow: column nowrap;
+`;
+
+const App = () => {
+  const [homePrice, setHomePrice] = useState(1400000);
+  const [payment, setPayment] = useState(homePrice * 0.005);
+
+  if (!homePrice) return (<div>Loading...</div>);
+
+  return (
+    <AppContainer>
+      <Header payment={payment} />
+      <Controls homePrice={homePrice} />
+      <Display homePrice={homePrice} />
+    </AppContainer>
+  );
+};
 
 export default App;
