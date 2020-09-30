@@ -7,7 +7,8 @@ const CostContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
-  align-items: space-around;
+  align-items: space-between;
+  padding: 16px 0px 16px 16px
 `;
 
 const CostBreakdown = ({ homePrice }) => (

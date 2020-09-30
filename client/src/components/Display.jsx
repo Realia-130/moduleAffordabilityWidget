@@ -9,7 +9,8 @@ const DisplayContainer = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
-  padding: 20px;
+  //padding: 20px;
+  margin-top: 30px;
 `;
 
 const Display = ({ homePrice }) => (
