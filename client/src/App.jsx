@@ -29,6 +29,17 @@ class App extends Component {
     };
   }
 
+  calculate() {
+    //home price effects principle, payment, taxes and downpayment
+    // 30 year rate payment % = .005
+    // interest rate effects prinicple and payment total only
+    // downpayment effects payment and principle and mortgage ins only
+    // principle === .84 of payment
+    // taxes === .14 of payment
+    // home insureance is $75 flat
+    // mortgage ins === .07 of payment, only if down payment is less than 20%
+  }
+
   render() {
     const { payment, homePrice } = this.state;
     if (!homePrice) return (<div>Loading...</div>);
