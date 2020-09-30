@@ -7,7 +7,7 @@ const DisplayContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
   padding: 20px;
 `;

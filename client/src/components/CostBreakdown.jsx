@@ -4,6 +4,10 @@ import Cost from './Cost.jsx';
 
 const CostContainer = styled.div`
   flex: 2;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: space-around;
 `;
 
 const CostBreakdown = ({ homePrice }) => (

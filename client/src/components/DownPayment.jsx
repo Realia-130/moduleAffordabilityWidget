@@ -6,11 +6,11 @@ const DownPaymentContainer = styled.div`
   flex: 1;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: space-between;
   border-style: solid;
   border-color: transparent;
-  border-width: 16px 8px 0px;
+  border-width: 15px 8px 0px;
 }
 `;
 
@@ -42,7 +42,6 @@ const InputContainer = styled.div`
     border-radius: 8px 0px 0px 8px;
     border-right-style: initial;
     border-right-color: initial;
-    margin-right: -15px;
 
     &:focus {
       position: relative;
