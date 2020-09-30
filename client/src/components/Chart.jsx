@@ -9,26 +9,6 @@ const ChartContainer = styled.div`
   height: 280px;
   width: 280px;
   margin: 0 20px;
-
-  // svg {
-  //   position: relative;
-  //   width: 100%;
-  //   height: 100%;
-  //   z-index: 1000;
-  // }
-
-  // svg circle {
-  //   position: absolute;
-  //   top: 50%;
-  //   left: 50%;
-  //   width: 100%;
-  //   height: 100%;
-  //   fill: none;
-  //   // stroke:rgb(5, 34, 134);
-  //   // stroke-width: 30;
-  //   // stroke-linecap: round;
-  //   transform: translate(20px,20px);
-  // }
 `;
 
 const Chart = () => (
