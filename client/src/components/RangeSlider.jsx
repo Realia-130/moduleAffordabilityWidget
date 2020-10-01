@@ -21,8 +21,6 @@ const RangeSlider = ({ homePrice, min, max }) => {
     setFill((e.target.value / (max - min)) * 100);
   };
 
-  console.log(homePrice);
-
   return (
     <Slider className="range" type="range" min={min} max={max} step="10" value={value} onChange={handleChange} fill={fill} />
   );

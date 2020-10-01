@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import RangeSlider from './RangeSlider.jsx';
+import numeral from 'numeral';
 
 const DownPaymentContainer = styled.div`
   flex: 1;
@@ -62,18 +63,22 @@ const InputContainer = styled.div`
   }
 `;
 
-const DownPayment = ({ homePrice }) => (
-  <DownPaymentContainer>
-    <TopContainer>
-      <h4>Down Payment</h4>
-      <InputContainer>
-        <input type='text' className='money-input' value='$5000'></input>
-        <input type='text' className='percent-input' value='20%'></input>
-      </InputContainer>
-    </TopContainer>
-    <RangeSlider homePrice={homePrice} />
+const DownPayment = ({ homePrice, state, downPayment }) => {
+  const formatDownPayment = numeral(downPayment).format('0,0');
 
-  </DownPaymentContainer>
-);
+  return (
+    <DownPaymentContainer>
+      <TopContainer>
+        <h4>Down Payment</h4>
+        <InputContainer>
+          <input type='text' className='money-input' value={`$${formatDownPayment}`}></input>
+          <input type='text' className='percent-input' value={`${state.percentDown * 100}%`}></input>
+        </InputContainer>
+      </TopContainer>
+      <RangeSlider homePrice={homePrice} />
+
+    </DownPaymentContainer>
+  )
+};
 
 export default DownPayment;

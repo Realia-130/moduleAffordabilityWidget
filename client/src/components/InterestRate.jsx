@@ -26,11 +26,11 @@ const TopContainer = styled.div`
   }
 `;
 
-const InterestRate = ({ homePrice }) => (
+const InterestRate = ({ homePrice, interestRate }) => (
   <InterestRateContainer>
     <TopContainer>
       <h4>Interest Rate</h4>
-      <input type='text' className='money-input'></input>
+      <input type='text' className='money-input' value={interestRate}></input>
     </TopContainer>
     <RangeSlider homePrice={homePrice} />
   </InterestRateContainer>

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Header from './components/Header.jsx';
 import Controls from './components/Controls.jsx';
 import Display from './components/Display.jsx';
+import * as calc from './utils/calculator.jsx';
 
 const AppContainer = styled.div`
   width: 100%;
@@ -17,38 +18,63 @@ class App extends Component {
 
     this.state = {
       loanType: '30-year fixed',
-      homePrice: 1400000,
-      payment: 10000,
-      downPayment: 700000,
+      homePrice: null,
+      payment: null,
+      downPayment: null,
       percentDown: 0.2,
       interestRate: 2.94,
-      principle: 11363,
-      propertyTaxes: 1896,
+      principle: null,
+      propertyTaxes: null,
       homeInsurance: 75,
-      mortgageInsurance: 0,
+      mortgageIns: 0,
+      loading: true,
+      error: null,
     };
+
+    this.handlePriceChange = this.handlePriceChange.bind(this);
   }
 
-  calculate() {
-    //home price effects principle, payment, taxes and downpayment
-    // 30 year rate payment % = .005
-    // interest rate effects prinicple and payment total only
-    // downpayment effects payment and principle and mortgage ins only
-    // principle === .84 of payment
-    // taxes === .14 of payment
-    // home insureance is $75 flat
-    // mortgage ins === .07 of payment, only if down payment is less than 20%
+  componentDidMount() {
+    this.handlePriceChange(1400000);
+  }
+
+
+  handlePriceChange(homePrice) {
+    const downPayment = calc.calculateAmountDown(homePrice, this.state.percentDown);
+    const propTax = calc.calcPropTax(homePrice);
+    const principle = calc.calcPrinciple(homePrice, downPayment, this.state.interestRate, 244);
+    const payment = calc.calcPayment(principle, propTax, this.state.mortgageIns);
+    const percentDown = calc.calculatePercentDown(homePrice, downPayment);
+
+    this.setState({
+      homePrice,
+      propertyTaxes: propTax,
+      principle,
+      payment,
+      downPayment,
+      loading: false,
+    });
   }
 
   render() {
-    const { payment, homePrice } = this.state;
-    if (!homePrice) return (<div>Loading...</div>);
+    const { payment, homePrice, interestRate, percentDown, downPayment, principle, loading, propertyTaxes, mortgageIns } = this.state;
+
+    if (loading) return (<div>Loading...</div>);
 
     return (
       <AppContainer>
         <Header payment={payment} />
-        <Controls homePrice={homePrice} />
-        <Display homePrice={homePrice} />
+        <Controls
+          homePrice={homePrice}
+          handlePriceChange={this.handlePriceChange}
+          state={this.state}
+          downPayment={downPayment}
+          interestRate={interestRate}
+        />
+        <Display
+          homePrice={homePrice}
+          state={this.state}
+        />
       </AppContainer>
     );
   }
