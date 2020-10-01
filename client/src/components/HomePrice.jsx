@@ -35,9 +35,16 @@ const HomePrice = ({ homePrice, handlePriceChange }) => {
   const formatPrice = numeral(homePrice).format('0,0');
 
   const handleChange = (e) => {
-    setValue(e.target.value);
-    setFill((e.target.value / max) * 100);
-    handlePriceChange(e.target.value);
+    let targetVal = e.target.value;
+
+    if (targetVal[0] === '$') {
+      const pureVal = targetVal.slice(1);
+      targetVal = numeral(pureVal).value();
+    }
+
+    setValue(targetVal);
+    setFill((targetVal / max) * 100);
+    handlePriceChange(targetVal);
   };
 
   const styles = {
@@ -56,7 +63,7 @@ const HomePrice = ({ homePrice, handlePriceChange }) => {
     <HomePriceContainer>
       <TopContainer className="top-container">
         <h4>Home Price</h4>
-        <input type="text" className="money-input" value={`$${formatPrice}`} />
+        <input type="text" className="money-input" value={`$${formatPrice}`} onChange={handleChange} />
       </TopContainer>
       <input style={styles} className="range" type="range" min="0" max={max} step="10" value={value} onChange={handleChange} />
       {/* <RangeSlider min={0} max={1500000} /> */}
