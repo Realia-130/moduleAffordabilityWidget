@@ -34,6 +34,7 @@ class App extends Component {
     this.handlePriceChange = this.handlePriceChange.bind(this);
     this.handleDownPaymentChange = this.handleDownPaymentChange.bind(this);
     this.handlePercentDownChange = this.handlePercentDownChange.bind(this);
+    this.handleInterestChange = this.handleInterestChange.bind(this);
   }
 
   componentDidMount() {
@@ -57,6 +58,19 @@ class App extends Component {
     });
   }
 
+  handleInterestChange(interestRate) {
+    console.log('Here');
+    const { homePrice, mortgageIns, propertyTaxes, downPayment } = this.state;
+    const principle = calc.calcPrinciple(homePrice, downPayment, interestRate, 244);
+    const payment = calc.calcPayment(principle, propertyTaxes, mortgageIns);
+
+    this.setState({
+      principle,
+      payment,
+      interestRate,
+    });
+  }
+
   handleDownPaymentChange(downPayment) {
     const { homePrice, mortgageIns, propertyTaxes } = this.state;
     const percentDown = calc.calculatePercentDown(homePrice, downPayment);
@@ -73,9 +87,9 @@ class App extends Component {
 
   handlePercentDownChange(percentDown) {
     percentDown = percentDown / 100;
-    const { homePrice, mortgageIns, propertyTaxes } = this.state;
+    const { homePrice, mortgageIns, propertyTaxes, interestRate } = this.state;
     const downPayment = calc.calculateAmountDown(homePrice, percentDown);
-    const principle = calc.calcPrinciple(homePrice, downPayment, percentDown, 244);
+    const principle = calc.calcPrinciple(homePrice, downPayment, interestRate, 244);
     const payment = calc.calcPayment(principle, propertyTaxes, mortgageIns);
 
     this.setState({
@@ -99,6 +113,7 @@ class App extends Component {
           handlePriceChange={this.handlePriceChange}
           handleDownPaymentChange={this.handleDownPaymentChange}
           handlePercentDownChange={this.handlePercentDownChange}
+          handleInterestChange={this.handleInterestChange}
           state={this.state}
           downPayment={downPayment}
           interestRate={interestRate}

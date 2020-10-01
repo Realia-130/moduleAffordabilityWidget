@@ -93,11 +93,9 @@ const DownPayment = ({ homePrice, state, downPayment, handleDownPaymentChange, h
 
   const handlePercent = (e) => {
     let val = e.target.value.replace('%', '');
-
     if (val === null) {
       val = '';
     }
-    console.log(val);
     handlePercentDownChange(val);
   };
 
