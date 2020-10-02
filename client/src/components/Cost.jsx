@@ -25,13 +25,13 @@ const ColorRound = styled.div`
   margin-right: 10px;
 `;
 
-const Cost = ({ color, title, homePrice }) => (
+const Cost = ({ color, title, display }) => (
   <CostContainer>
     <CostDescription>
       <ColorRound color={color} />
       {title}
     </CostDescription>
-    <h4>$3000</h4>
+    <h4>{`$${display}`}</h4>
   </CostContainer>
 );
 

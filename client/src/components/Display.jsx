@@ -13,10 +13,10 @@ const DisplayContainer = styled.div`
   margin-top: 30px;
 `;
 
-const Display = ({ homePrice }) => (
+const Display = ({ homePrice, state }) => (
   <DisplayContainer>
-    <Chart />
-    <CostBreakdown homePrice={homePrice} />
+    <Chart state={state} />
+    <CostBreakdown homePrice={homePrice} state={state} />
   </DisplayContainer>
 );
 

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import RangeSlider from './RangeSlider.jsx';
+import numeral from 'numeral';
 
 const DownPaymentContainer = styled.div`
   flex: 1;
@@ -62,18 +63,79 @@ const InputContainer = styled.div`
   }
 `;
 
-const DownPayment = ({ homePrice }) => (
-  <DownPaymentContainer>
-    <TopContainer>
-      <h4>Down Payment</h4>
-      <InputContainer>
-        <input type='text' className='money-input' value='$5000'></input>
-        <input type='text' className='percent-input' value='20%'></input>
-      </InputContainer>
-    </TopContainer>
-    <RangeSlider homePrice={homePrice} />
+const DownPayment = ({ homePrice, state, downPayment, handleDownPaymentChange, handlePercentDownChange }) => {
+  const [value, setValue] = useState(downPayment);
+  const [fill, setFill] = useState(75);
+  const [max, setMax] = useState(0);
+  const formatDownPayment = numeral(downPayment).format('0,0');
+  const formatDownPercent = Math.floor(state.percentDown * 100);
 
-  </DownPaymentContainer>
-);
+  const styles = {
+    background: `linear-gradient(to right,
+      rgb(0, 120, 130) 0%,
+      rgb(0, 120, 130) ${fill}%,
+      rgb(205, 209, 212) ${fill}%,
+      rgb(205, 209, 212) 100%)`,
+  };
+
+  const handleChange = (e) => {
+    let targetVal = e.target.value;
+
+    if (targetVal[0] === '$') {
+      const pureVal = targetVal.slice(1);
+      targetVal = numeral(pureVal).value();
+    }
+
+    setValue(targetVal);
+    setFill((targetVal / max) * 100);
+    handleDownPaymentChange(targetVal);
+  };
+
+  const handlePercent = (e) => {
+    let val = e.target.value.replace('%', '');
+    if (val === null) {
+      val = '';
+    }
+    handlePercentDownChange(val);
+  };
+
+  useEffect(() => {
+    setMax(downPayment * 1.5);
+  }, []);
+
+  return (
+    <DownPaymentContainer>
+      <TopContainer>
+        <h4>Down Payment</h4>
+        <InputContainer>
+          <input
+            type="text"
+            className="money-input"
+            value={`$${formatDownPayment}`}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            className="percent-input"
+            value={`${formatDownPercent}%`}
+            onChange={handlePercent}
+          />
+        </InputContainer>
+      </TopContainer>
+      <input
+        style={styles}
+        className="range"
+        type="range"
+        min="0"
+        max={max}
+        step="10"
+        value={value}
+        onChange={handleChange}
+      />
+      {/* <RangeSlider homePrice={homePrice} /> */}
+
+    </DownPaymentContainer>
+  )
+};
 
 export default DownPayment;
