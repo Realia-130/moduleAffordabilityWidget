@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import LoanRates from './LoanRates.jsx';
 
 const ModalBackground = styled.div`
@@ -22,14 +23,27 @@ const LendersContainer = styled.div`
   flex-flow: column nowrap;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(255,255,255,1);
-`;
+  background-color: #F9F9F9;
+  border-radius: 8px;
+  padding: 20px;
+  `;
 
 const LenderModal = () => {
+  const [lenders, setLenders] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // useEffect(async () => {
+  //   const { data } = await axios.get('/lenders');
+  //   setLenders(data);
+  //   setLoading(false);
+  // }, []);
+
+  // if (loading) return (<div>Loading...</div>);
 
   return (
     <ModalBackground>
       <LendersContainer>
+        {console.log(lenders)}
         <LoanRates></LoanRates>
       </LendersContainer>
     </ModalBackground>
