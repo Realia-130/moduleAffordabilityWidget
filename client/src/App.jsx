@@ -4,6 +4,7 @@ import Header from './components/Header.jsx';
 import Controls from './components/Controls.jsx';
 import Display from './components/Display.jsx';
 import * as calc from './utils/calculator.jsx';
+import LenderModal from './components/LenderModal.jsx';
 
 const AppContainer = styled.div`
   width: 100%;
@@ -122,6 +123,7 @@ class App extends Component {
           homePrice={homePrice}
           state={this.state}
         />
+        <LenderModal />
       </AppContainer>
     );
   }
