@@ -30,7 +30,7 @@ const RatesHeader = styled.div`
 const LowestRate = styled.div`
   background-color: #f74a27;
   color: #FFF;
-  padding: 0 20px;
+  padding: 4px 20px;
   position: absolute;
   top: 45px;
   left: 0;
