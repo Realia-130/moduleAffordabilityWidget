@@ -13,6 +13,7 @@ const RatesContainer = styled.div`
   font-size: 12px;
   border-radius: 4px 4px 0 0;
   background-color: #FFF;
+  margin-bottom: 20px;
 `;
 
 const RatesHeader = styled.div`
@@ -38,12 +39,14 @@ const LowestRate = styled.div`
   left: 0;
 `;
 
-const LoanRates = () => {
+const LoanRates = ({ title, subTitle, lenders }) => {
+
+  //const sortedLenders = lenders.sort((a, b) => )
 
   return (
     <RatesContainer>
-      <LowestRate>Lowest APR (30yr)</LowestRate>
-      <RatesHeader>30 Year Fixed</RatesHeader>
+      <LowestRate>Lowest APR ({subTitle})</LowestRate>
+      <RatesHeader>{title}</RatesHeader>
       <Lender />
       <Lender />
     </RatesContainer>

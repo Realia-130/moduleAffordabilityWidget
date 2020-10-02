@@ -42,7 +42,7 @@ const CustomButton = styled.a`
   }
 `;
 
-const CostBreakdown = ({ state }) => {
+const CostBreakdown = ({ state, toggleModal }) => {
   const { mortgageIns, principle, propertyTaxes, homeInsurance } = state;
 
   return (
@@ -52,7 +52,7 @@ const CostBreakdown = ({ state }) => {
       <Cost color="rgb(194, 213, 0)" title="Home Insurance" display={homeInsurance} />
       <Cost color="rgb(206, 182, 255)" title="Mortgage ins. & other" display={mortgageIns} />
       <ButtonContainer>
-        <CustomButton>See Today's Mortgage Rates</CustomButton>
+        <CustomButton onClick={toggleModal}>See Today's Mortgage Rates</CustomButton>
       </ButtonContainer>
     </CostContainer>
   )
