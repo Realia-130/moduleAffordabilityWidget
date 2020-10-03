@@ -45,7 +45,7 @@ const LenderModal = ({ toggleModal }) => {
     e.stopPropagation();
   };
 
-  if (loading) return (<div>Loading...</div>);
+  if (loading) return (<ModalBackground />);
 
   const filterBy30Year = lenders.filter((lender) => lender.offerings.terms === '30 Year Fixed');
 
