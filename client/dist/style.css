@@ -69,11 +69,6 @@ input[type=range]::-webkit-slider-runnable-track {
   padding: 0px;
   cursor: default;
   background: linear-gradient(to right, rgb(0, 120, 130) 0%, rgb(0, 120, 130) var(--webkitProgressPercent), rgb(205, 209, 212) var(--webkitProgressPercent), rgb(205, 209, 212) 100%);
-  /* background-image: linear-gradient(
-    90deg,
-    #008278 var(--webkitProgressPercent),
-    #D4CDC8 var(--webkitProgressPercent)
-  ); */
 }
 
 input.range:focus {

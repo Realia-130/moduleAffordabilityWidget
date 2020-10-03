@@ -29,7 +29,6 @@ const TopContainer = styled.div`
 
 const InterestRate = ({ homePrice, interestRate, handleInterestChange }) => {
   const [value, setValue] = useState(interestRate);
-  const [fill, setFill] = useState(75);
   const [max, setMax] = useState(0);
 
   const handleChange = (e) => {
@@ -37,16 +36,9 @@ const InterestRate = ({ homePrice, interestRate, handleInterestChange }) => {
     if (val === null) {
       val = '';
     }
+    e.target.style.setProperty("--webkitProgressPercent", `${(val / max) * 100 - 4}%`);
     handleInterestChange(val);
     setValue(val);
-  };
-
-  const styles = {
-    background: `linear-gradient(to right,
-      rgb(0, 120, 130) 0%,
-      rgb(0, 120, 130) ${fill}%,
-      rgb(205, 209, 212) ${fill}%,
-      rgb(205, 209, 212) 100%)`,
   };
 
   useEffect(() => {
@@ -60,7 +52,6 @@ const InterestRate = ({ homePrice, interestRate, handleInterestChange }) => {
         <input type='text' className='money-input' value={`${interestRate}%`} onChange={handleChange}></input>
       </TopContainer>
       <input
-        style={styles}
         className="range"
         type="range"
         min="0"

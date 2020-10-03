@@ -29,7 +29,6 @@ const TopContainer = styled.div`
 
 const HomePrice = ({ homePrice, handlePriceChange }) => {
   const [value, setValue] = useState(homePrice);
-  const [fill, setFill] = useState(75);
   const [max, setMax] = useState(0);
   const formatPrice = numeral(homePrice).format('0,0');
 
@@ -42,24 +41,15 @@ const HomePrice = ({ homePrice, handlePriceChange }) => {
     }
     e.target.style.setProperty("--webkitProgressPercent", `${(targetVal / max) * 100 - 4}%`);
     setValue(targetVal);
-    //setFill((targetVal / max) * 100);
     handlePriceChange(targetVal);
   };
-
-  // const styles = {
-  //   background: `linear-gradient(to right,
-  //     rgb(0, 120, 130) 0%,
-  //     rgb(0, 120, 130) ${fill}%,
-  //     rgb(205, 209, 212) ${fill}%,
-  //     rgb(205, 209, 212) 100%)`,
-  // };
 
   useEffect(() => {
     setMax(homePrice * 1.5);
   }, []);
 
   return (
-    <HomePriceContainer fill={fill}>
+    <HomePriceContainer>
       <TopContainer className="top-container">
         <h4>Home Price</h4>
         <input type="text" className="money-input" value={`$${formatPrice}`} onChange={handleChange} />

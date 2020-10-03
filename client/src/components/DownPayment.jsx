@@ -85,9 +85,8 @@ const DownPayment = ({ homePrice, state, downPayment, handleDownPaymentChange, h
       const pureVal = targetVal.slice(1);
       targetVal = numeral(pureVal).value();
     }
-
+    e.target.style.setProperty("--webkitProgressPercent", `${(targetVal / max) * 100 - 4}%`);
     setValue(targetVal);
-    setFill((targetVal / max) * 100);
     handleDownPaymentChange(targetVal);
   };
 
@@ -132,7 +131,6 @@ const DownPayment = ({ homePrice, state, downPayment, handleDownPaymentChange, h
         value={value}
         onChange={handleChange}
       />
-      {/* <RangeSlider homePrice={homePrice} /> */}
 
     </DownPaymentContainer>
   )
