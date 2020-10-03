@@ -10,6 +10,7 @@ const ModalBackground = styled.div`
   width: 100vw;
   height: 100vh;
   backdrop-filter: blur(2px);
+  background-color: rgba(0,0,0,.6);
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
@@ -17,6 +18,7 @@ const ModalBackground = styled.div`
 `;
 
 const LendersContainer = styled.div`
+  height: 80%;
   width: 60%;
   display: flex;
   flex-flow: column nowrap;
@@ -25,6 +27,7 @@ const LendersContainer = styled.div`
   background-color: #F9F9F9;
   border-radius: 8px;
   padding: 20px;
+  overflow: auto;
   `;
 
 const LenderModal = ({ toggleModal }) => {

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import RangeSlider from './RangeSlider.jsx';
 import numeral from 'numeral';
 
 const DownPaymentContainer = styled.div`
@@ -63,20 +62,17 @@ const InputContainer = styled.div`
   }
 `;
 
-const DownPayment = ({ homePrice, state, downPayment, handleDownPaymentChange, handlePercentDownChange }) => {
+const DownPayment = ({
+  homePrice,
+  state,
+  downPayment,
+  handleDownPaymentChange,
+  handlePercentDownChange
+}) => {
   const [value, setValue] = useState(downPayment);
-  const [fill, setFill] = useState(75);
   const [max, setMax] = useState(0);
   const formatDownPayment = numeral(downPayment).format('0,0');
   const formatDownPercent = Math.floor(state.percentDown * 100);
-
-  const styles = {
-    background: `linear-gradient(to right,
-      rgb(0, 120, 130) 0%,
-      rgb(0, 120, 130) ${fill}%,
-      rgb(205, 209, 212) ${fill}%,
-      rgb(205, 209, 212) 100%)`,
-  };
 
   const handleChange = (e) => {
     let targetVal = e.target.value;
@@ -85,12 +81,13 @@ const DownPayment = ({ homePrice, state, downPayment, handleDownPaymentChange, h
       const pureVal = targetVal.slice(1);
       targetVal = numeral(pureVal).value();
     }
-    e.target.style.setProperty("--webkitProgressPercent", `${(targetVal / max) * 100 - 4}%`);
+
+    e.target.style.setProperty('--webkitProgressPercent', `${(targetVal / max) * 100 - 4}%`);
     setValue(targetVal);
     handleDownPaymentChange(targetVal);
   };
 
-  const handlePercent = (e) => {
+  const handlePercentChange = (e) => {
     let val = e.target.value.replace('%', '');
     if (val === null) {
       val = '';
@@ -117,12 +114,11 @@ const DownPayment = ({ homePrice, state, downPayment, handleDownPaymentChange, h
             type="text"
             className="percent-input"
             value={`${formatDownPercent}%`}
-            onChange={handlePercent}
+            onChange={handlePercentChange}
           />
         </InputContainer>
       </TopContainer>
       <input
-        style={styles}
         className="range"
         type="range"
         min="0"
@@ -131,9 +127,8 @@ const DownPayment = ({ homePrice, state, downPayment, handleDownPaymentChange, h
         value={value}
         onChange={handleChange}
       />
-
     </DownPaymentContainer>
-  )
+  );
 };
 
 export default DownPayment;

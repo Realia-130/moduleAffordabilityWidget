@@ -27,7 +27,11 @@ const TopContainer = styled.div`
   }
 `;
 
-const InterestRate = ({ homePrice, interestRate, handleInterestChange }) => {
+const InterestRate = ({
+  homePrice,
+  interestRate,
+  handleInterestChange
+}) => {
   const [value, setValue] = useState(interestRate);
   const [max, setMax] = useState(0);
 
@@ -36,7 +40,7 @@ const InterestRate = ({ homePrice, interestRate, handleInterestChange }) => {
     if (val === null) {
       val = '';
     }
-    e.target.style.setProperty("--webkitProgressPercent", `${(val / max) * 100 - 4}%`);
+    e.target.style.setProperty('--webkitProgressPercent', `${(val / max) * 100 - 4}%`);
     handleInterestChange(val);
     setValue(val);
   };
@@ -49,7 +53,12 @@ const InterestRate = ({ homePrice, interestRate, handleInterestChange }) => {
     <InterestRateContainer>
       <TopContainer>
         <h4>Interest Rate</h4>
-        <input type='text' className='money-input' value={`${interestRate}%`} onChange={handleChange}></input>
+        <input
+          type="text"
+          className="money-input"
+          value={`${interestRate}%`}
+          onChange={handleChange}
+        />
       </TopContainer>
       <input
         className="range"
@@ -60,7 +69,6 @@ const InterestRate = ({ homePrice, interestRate, handleInterestChange }) => {
         value={value}
         onChange={(e) => handleChange(e)}
       />
-      {/* <RangeSlider homePrice={homePrice} /> */}
     </InterestRateContainer>
   );
 };
