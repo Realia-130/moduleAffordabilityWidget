@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-import RangeSlider from './RangeSlider.jsx';
-import numeral from 'numeral';
 
 const InterestRateContainer = styled.div`
-flex: 1;
+  flex: 1;
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
@@ -34,13 +32,14 @@ const InterestRate = ({
 }) => {
   const [value, setValue] = useState(interestRate);
   const [max, setMax] = useState(0);
+  const sliderRef = useRef();
 
   const handleChange = (e) => {
     let val = e.target.value.replace('%', '');
     if (val === null) {
       val = '';
     }
-    e.target.style.setProperty('--webkitProgressPercent', `${(val / max) * 100 - 4}%`);
+    sliderRef.current.style.setProperty('--webkitProgressPercent', `${(val / max) * 100 - 4}%`);
     handleInterestChange(val);
     setValue(val);
   };
@@ -61,6 +60,7 @@ const InterestRate = ({
         />
       </TopContainer>
       <input
+        ref={sliderRef}
         className="range"
         type="range"
         min="0"

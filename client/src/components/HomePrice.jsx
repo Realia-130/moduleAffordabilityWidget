@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import numeral from 'numeral';
 
@@ -29,6 +29,7 @@ const TopContainer = styled.div`
 const HomePrice = ({ homePrice, handlePriceChange }) => {
   const [value, setValue] = useState(homePrice);
   const [max, setMax] = useState(0);
+  const sliderRef = useRef();
   const formatPrice = numeral(homePrice).format('0,0');
 
   const handleChange = (e) => {
@@ -39,7 +40,7 @@ const HomePrice = ({ homePrice, handlePriceChange }) => {
       targetVal = numeral(pureVal).value();
     }
 
-    e.target.style.setProperty('--webkitProgressPercent', `${(targetVal / max) * 100 - 4}%`);
+    sliderRef.current.style.setProperty('--webkitProgressPercent', `${(targetVal / max) * 100 - 4}%`);
     setValue(targetVal);
     handlePriceChange(targetVal);
   };
@@ -60,6 +61,7 @@ const HomePrice = ({ homePrice, handlePriceChange }) => {
         />
       </TopContainer>
       <input
+        ref={sliderRef}
         className="range"
         type="range"
         min="0"

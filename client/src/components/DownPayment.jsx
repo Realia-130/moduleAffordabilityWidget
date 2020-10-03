@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import numeral from 'numeral';
 
@@ -71,6 +71,7 @@ const DownPayment = ({
 }) => {
   const [value, setValue] = useState(downPayment);
   const [max, setMax] = useState(0);
+  const sliderRef = useRef();
   const formatDownPayment = numeral(downPayment).format('0,0');
   const formatDownPercent = Math.floor(state.percentDown * 100);
 
@@ -82,7 +83,7 @@ const DownPayment = ({
       targetVal = numeral(pureVal).value();
     }
 
-    e.target.style.setProperty('--webkitProgressPercent', `${(targetVal / max) * 100 - 4}%`);
+    sliderRef.current.style.setProperty('--webkitProgressPercent', `${(targetVal / max) * 100 - 4}%`);
     setValue(targetVal);
     handleDownPaymentChange(targetVal);
   };
@@ -119,6 +120,7 @@ const DownPayment = ({
         </InputContainer>
       </TopContainer>
       <input
+        ref={sliderRef}
         className="range"
         type="range"
         min="0"

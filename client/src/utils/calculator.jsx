@@ -13,3 +13,10 @@ export const calcPrinciple = (homePrice, downPayment, interestRate, mortgageType
 export const calcPayment = (principle, propertyTax, mortgageInsurance = 0) => {
   return Math.floor(principle + propertyTax + mortgageInsurance + 75);
 };
+
+export const calcMortgageIns = (percentDown, homePrice, downPayment) => {
+  if (percentDown < 0.2) {
+    return Math.floor((homePrice - downPayment) * 0.000366);
+  }
+  return 0;
+};

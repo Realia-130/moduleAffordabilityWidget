@@ -18,7 +18,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      loanType: '30-year fixed',
+      loanType: 244,
       homePrice: null,
       payment: null,
       downPayment: null,
@@ -27,7 +27,7 @@ class App extends Component {
       principle: null,
       propertyTaxes: null,
       homeInsurance: 75,
-      mortgageIns: 200,
+      mortgageIns: 0,
       loading: true,
       error: null,
       showModal: false,
@@ -37,6 +37,7 @@ class App extends Component {
     this.handleDownPaymentChange = this.handleDownPaymentChange.bind(this);
     this.handlePercentDownChange = this.handlePercentDownChange.bind(this);
     this.handleInterestChange = this.handleInterestChange.bind(this);
+    this.handleLoanTypeChange = this.handleLoanTypeChange.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
   }
 
@@ -47,7 +48,7 @@ class App extends Component {
   handlePriceChange(homePrice) {
     const downPayment = calc.calculateAmountDown(homePrice, this.state.percentDown);
     const propTax = calc.calcPropTax(homePrice);
-    const principle = calc.calcPrinciple(homePrice, downPayment, this.state.interestRate, 244);
+    const principle = calc.calcPrinciple(homePrice, downPayment, this.state.interestRate, this.state.loanType);
     const payment = calc.calcPayment(principle, propTax, this.state.mortgageIns);
     const percentDown = calc.calculatePercentDown(homePrice, downPayment);
 
@@ -62,9 +63,15 @@ class App extends Component {
   }
 
   handleInterestChange(interestRate) {
-    console.log('Here');
-    const { homePrice, mortgageIns, propertyTaxes, downPayment } = this.state;
-    const principle = calc.calcPrinciple(homePrice, downPayment, interestRate, 244);
+    const {
+      homePrice,
+      mortgageIns,
+      propertyTaxes,
+      downPayment,
+      loanType,
+    } = this.state;
+
+    const principle = calc.calcPrinciple(homePrice, downPayment, interestRate, loanType);
     const payment = calc.calcPayment(principle, propertyTaxes, mortgageIns);
 
     this.setState({
@@ -75,12 +82,19 @@ class App extends Component {
   }
 
   handleDownPaymentChange(downPayment) {
-    const { homePrice, mortgageIns, propertyTaxes } = this.state;
+    const {
+      homePrice,
+      propertyTaxes,
+      loanType,
+    } = this.state;
+
     const percentDown = calc.calculatePercentDown(homePrice, downPayment);
-    const principle = calc.calcPrinciple(homePrice, downPayment, percentDown, 244);
+    const principle = calc.calcPrinciple(homePrice, downPayment, percentDown, loanType);
+    const mortgageIns = calc.calcMortgageIns(percentDown, homePrice, downPayment);
     const payment = calc.calcPayment(principle, propertyTaxes, mortgageIns);
 
     this.setState({
+      mortgageIns,
       principle,
       payment,
       downPayment,
@@ -88,18 +102,45 @@ class App extends Component {
     });
   }
 
-  handlePercentDownChange(percentDown) {
-    percentDown = percentDown / 100;
-    const { homePrice, mortgageIns, propertyTaxes, interestRate } = this.state;
+  handlePercentDownChange(percentDownRaw) {
+    const percentDown = percentDownRaw / 100;
+    const {
+      homePrice,
+      propertyTaxes,
+      interestRate,
+      loanType,
+    } = this.state;
+
     const downPayment = calc.calculateAmountDown(homePrice, percentDown);
-    const principle = calc.calcPrinciple(homePrice, downPayment, interestRate, 244);
+    const principle = calc.calcPrinciple(homePrice, downPayment, interestRate, loanType);
+    const mortgageIns = calc.calcMortgageIns(percentDown, homePrice, downPayment);
     const payment = calc.calcPayment(principle, propertyTaxes, mortgageIns);
 
     this.setState({
+      mortgageIns,
       principle,
       payment,
       downPayment,
       percentDown,
+    });
+  }
+
+  handleLoanTypeChange(loanType) {
+    const {
+      homePrice,
+      downPayment,
+      interestRate,
+      propertyTaxes,
+      mortgageIns,
+    } = this.state;
+
+    const principle = calc.calcPrinciple(homePrice, downPayment, interestRate, loanType);
+    const payment = calc.calcPayment(principle, propertyTaxes, mortgageIns);
+
+    this.setState({
+      principle,
+      loanType,
+      payment,
     });
   }
 
@@ -122,6 +163,7 @@ class App extends Component {
           handleDownPaymentChange={this.handleDownPaymentChange}
           handlePercentDownChange={this.handlePercentDownChange}
           handleInterestChange={this.handleInterestChange}
+          handleLoanTypeChange={this.handleLoanTypeChange}
           state={this.state}
           downPayment={downPayment}
           interestRate={interestRate}
