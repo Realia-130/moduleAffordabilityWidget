@@ -3,8 +3,15 @@ import styled from 'styled-components';
 import Header from './components/Header.jsx';
 import Controls from './components/Controls.jsx';
 import Display from './components/Display.jsx';
-import * as calc from './utils/calculator.jsx';
 import LenderModal from './components/LenderModal.jsx';
+import {
+  calculateAmountDown,
+  calculatePercentDown,
+  calcPropTax,
+  calcPrinciple,
+  calcPayment,
+  calcMortgageIns,
+} from './utils/calculator.jsx';
 
 const AppContainer = styled.div`
   width: 100%;
@@ -46,11 +53,22 @@ class App extends Component {
   }
 
   handlePriceChange(homePrice) {
-    const downPayment = calc.calculateAmountDown(homePrice, this.state.percentDown);
-    const propTax = calc.calcPropTax(homePrice);
-    const principle = calc.calcPrinciple(homePrice, downPayment, this.state.interestRate, this.state.loanType);
-    const payment = calc.calcPayment(principle, propTax, this.state.mortgageIns);
-    const percentDown = calc.calculatePercentDown(homePrice, downPayment);
+    const {
+      percentDown,
+      mortgageIns,
+      interestRate,
+      loanType,
+    } = this.state;
+
+    const downPayment = calculateAmountDown(homePrice, percentDown);
+    const propTax = calcPropTax(homePrice);
+    const principle = calcPrinciple(
+      homePrice,
+      downPayment,
+      interestRate,
+      loanType,
+    );
+    const payment = calcPayment(principle, propTax, mortgageIns);
 
     this.setState({
       homePrice,
@@ -71,8 +89,8 @@ class App extends Component {
       loanType,
     } = this.state;
 
-    const principle = calc.calcPrinciple(homePrice, downPayment, interestRate, loanType);
-    const payment = calc.calcPayment(principle, propertyTaxes, mortgageIns);
+    const principle = calcPrinciple(homePrice, downPayment, interestRate, loanType);
+    const payment = calcPayment(principle, propertyTaxes, mortgageIns);
 
     this.setState({
       principle,
@@ -88,10 +106,10 @@ class App extends Component {
       loanType,
     } = this.state;
 
-    const percentDown = calc.calculatePercentDown(homePrice, downPayment);
-    const principle = calc.calcPrinciple(homePrice, downPayment, percentDown, loanType);
-    const mortgageIns = calc.calcMortgageIns(percentDown, homePrice, downPayment);
-    const payment = calc.calcPayment(principle, propertyTaxes, mortgageIns);
+    const percentDown = calculatePercentDown(homePrice, downPayment);
+    const principle = calcPrinciple(homePrice, downPayment, percentDown, loanType);
+    const mortgageIns = calcMortgageIns(percentDown, homePrice, downPayment);
+    const payment = calcPayment(principle, propertyTaxes, mortgageIns);
 
     this.setState({
       mortgageIns,
@@ -111,10 +129,10 @@ class App extends Component {
       loanType,
     } = this.state;
 
-    const downPayment = calc.calculateAmountDown(homePrice, percentDown);
-    const principle = calc.calcPrinciple(homePrice, downPayment, interestRate, loanType);
-    const mortgageIns = calc.calcMortgageIns(percentDown, homePrice, downPayment);
-    const payment = calc.calcPayment(principle, propertyTaxes, mortgageIns);
+    const downPayment = calculateAmountDown(homePrice, percentDown);
+    const principle = calcPrinciple(homePrice, downPayment, interestRate, loanType);
+    const mortgageIns = calcMortgageIns(percentDown, homePrice, downPayment);
+    const payment = calcPayment(principle, propertyTaxes, mortgageIns);
 
     this.setState({
       mortgageIns,
@@ -134,8 +152,8 @@ class App extends Component {
       mortgageIns,
     } = this.state;
 
-    const principle = calc.calcPrinciple(homePrice, downPayment, interestRate, loanType);
-    const payment = calc.calcPayment(principle, propertyTaxes, mortgageIns);
+    const principle = calcPrinciple(homePrice, downPayment, interestRate, loanType);
+    const payment = calcPayment(principle, propertyTaxes, mortgageIns);
 
     this.setState({
       principle,

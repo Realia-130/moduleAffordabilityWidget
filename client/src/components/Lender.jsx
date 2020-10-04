@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import StarRating from './StarRating.jsx';
 
 const LenderContainer = styled.div`
   width: 100%;
@@ -85,7 +86,8 @@ const Lender = () => {
       <LenderInfo>
         <div>30 year fixed</div>
         <div><GreenLink>Random Lender</GreenLink></div>
-        <div>***** 1033 Reviews</div>
+        {/* <div>&#9733; 1033 Reviews</div> */}
+        <StarRating rating='3.9' />
       </LenderInfo>
       <Quotes>
         <div><span className="bold">2.921 %</span> APR</div>
