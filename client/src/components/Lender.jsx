@@ -79,15 +79,20 @@ const GreenLink = styled.span`
   font-weight: 100;
 `;
 
-const Lender = () => {
+const Lender = ({ loan, lender }) => {
+
+  console.log(loan);
+  console.log(lender);
 
   return (
     <LenderContainer>
       <LenderInfo>
         <div>30 year fixed</div>
         <div><GreenLink>Random Lender</GreenLink></div>
-        {/* <div>&#9733; 1033 Reviews</div> */}
-        <StarRating rating='3.9' />
+        <div>
+          <StarRating rating='3.9' />
+          1033 Reviews
+        </div>
       </LenderInfo>
       <Quotes>
         <div><span className="bold">2.921 %</span> APR</div>

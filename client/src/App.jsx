@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import Header from './components/Header.jsx';
 import Controls from './components/Controls.jsx';
 import Display from './components/Display.jsx';
@@ -48,8 +49,10 @@ class App extends Component {
     this.toggleModal = this.toggleModal.bind(this);
   }
 
-  componentDidMount() {
-    this.handlePriceChange(1400000);
+  async componentDidMount() {
+    const randomIndex = Math.floor(Math.random() * 100);
+    const { data } = await axios.get(`/homes/${randomIndex}`);
+    this.handlePriceChange(data.price);
   }
 
   handlePriceChange(homePrice) {
