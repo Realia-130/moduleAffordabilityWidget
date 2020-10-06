@@ -36,7 +36,7 @@ const LenderModal = ({ toggleModal }) => {
 
   useEffect(() => {
     const fetchLenders = async () => {
-      const { data } = await axios.get('/lenders');
+      const { data } = await axios.get('http://localhost:5000/lenders');
       console.log(data);
       setLenders(data);
       setLoading(false);

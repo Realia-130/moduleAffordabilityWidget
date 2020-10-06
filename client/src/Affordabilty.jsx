@@ -21,7 +21,7 @@ const AppContainer = styled.div`
   flex-flow: column nowrap;
 `;
 
-class App extends Component {
+class Affordability extends Component {
   constructor(props) {
     super(props);
 
@@ -51,7 +51,7 @@ class App extends Component {
 
   async componentDidMount() {
     const randomIndex = Math.floor(Math.random() * 100);
-    const { data } = await axios.get(`/homes/${randomIndex}`);
+    const { data } = await axios.get(`http://localhost:5000/homes/${randomIndex}`);
     this.handlePriceChange(data.price);
   }
 
@@ -200,4 +200,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Affordability;
