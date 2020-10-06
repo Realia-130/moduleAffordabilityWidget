@@ -28,7 +28,6 @@ const Chart = ({ state }) => {
 
   const findFill = (input, total) => (input / total) * 100;
   const total = mortgageIns + principle + propertyTaxes + homeInsurance;
-
   const principleFill = findFill(principle, total);
   const mortgageInsFill = findFill(mortgageIns, total);
   const propertyFill = findFill(propertyTaxes, total);

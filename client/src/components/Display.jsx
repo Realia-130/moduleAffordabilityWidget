@@ -9,14 +9,17 @@ const DisplayContainer = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
-  //padding: 20px;
   margin-top: 30px;
 `;
 
-const Display = ({ homePrice, state }) => (
+const Display = ({ homePrice, state, toggleModal }) => (
   <DisplayContainer>
     <Chart state={state} />
-    <CostBreakdown homePrice={homePrice} state={state} />
+    <CostBreakdown
+      homePrice={homePrice}
+      state={state}
+      toggleModal={toggleModal}
+    />
   </DisplayContainer>
 );
 

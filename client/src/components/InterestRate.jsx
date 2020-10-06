@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-import RangeSlider from './RangeSlider.jsx';
-import numeral from 'numeral';
 
 const InterestRateContainer = styled.div`
-flex: 1;
+  flex: 1;
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
@@ -27,26 +25,23 @@ const TopContainer = styled.div`
   }
 `;
 
-const InterestRate = ({ homePrice, interestRate, handleInterestChange }) => {
+const InterestRate = ({
+  homePrice,
+  interestRate,
+  handleInterestChange
+}) => {
   const [value, setValue] = useState(interestRate);
-  const [fill, setFill] = useState(75);
   const [max, setMax] = useState(0);
+  const sliderRef = useRef();
 
   const handleChange = (e) => {
     let val = e.target.value.replace('%', '');
     if (val === null) {
       val = '';
     }
+    sliderRef.current.style.setProperty('--webkitProgressPercent', `${(val / max) * 100 - 4}%`);
     handleInterestChange(val);
     setValue(val);
-  };
-
-  const styles = {
-    background: `linear-gradient(to right,
-      rgb(0, 120, 130) 0%,
-      rgb(0, 120, 130) ${fill}%,
-      rgb(205, 209, 212) ${fill}%,
-      rgb(205, 209, 212) 100%)`,
   };
 
   useEffect(() => {
@@ -57,10 +52,15 @@ const InterestRate = ({ homePrice, interestRate, handleInterestChange }) => {
     <InterestRateContainer>
       <TopContainer>
         <h4>Interest Rate</h4>
-        <input type='text' className='money-input' value={`${interestRate}%`} onChange={handleChange}></input>
+        <input
+          type="text"
+          className="money-input"
+          value={`${interestRate}%`}
+          onChange={handleChange}
+        />
       </TopContainer>
       <input
-        style={styles}
+        ref={sliderRef}
         className="range"
         type="range"
         min="0"
@@ -69,7 +69,6 @@ const InterestRate = ({ homePrice, interestRate, handleInterestChange }) => {
         value={value}
         onChange={(e) => handleChange(e)}
       />
-      {/* <RangeSlider homePrice={homePrice} /> */}
     </InterestRateContainer>
   );
 };
