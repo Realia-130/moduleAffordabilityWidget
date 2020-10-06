@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import GlobalStyles from './GlobalStyles.jsx';
 import Header from './components/Header.jsx';
 import Controls from './components/Controls.jsx';
 import Display from './components/Display.jsx';
@@ -176,26 +177,29 @@ class Affordability extends Component {
     if (loading) return (<div>Loading...</div>);
 
     return (
-      <AppContainer>
-        <Header payment={payment} />
-        <Controls
-          homePrice={homePrice}
-          handlePriceChange={this.handlePriceChange}
-          handleDownPaymentChange={this.handleDownPaymentChange}
-          handlePercentDownChange={this.handlePercentDownChange}
-          handleInterestChange={this.handleInterestChange}
-          handleLoanTypeChange={this.handleLoanTypeChange}
-          state={this.state}
-          downPayment={downPayment}
-          interestRate={interestRate}
-        />
-        <Display
-          homePrice={homePrice}
-          state={this.state}
-          toggleModal={this.toggleModal}
-        />
-        {showModal && <LenderModal toggleModal={this.toggleModal} />}
-      </AppContainer>
+      <>
+        <GlobalStyles />
+        <AppContainer>
+          <Header payment={payment} />
+          <Controls
+            homePrice={homePrice}
+            handlePriceChange={this.handlePriceChange}
+            handleDownPaymentChange={this.handleDownPaymentChange}
+            handlePercentDownChange={this.handlePercentDownChange}
+            handleInterestChange={this.handleInterestChange}
+            handleLoanTypeChange={this.handleLoanTypeChange}
+            state={this.state}
+            downPayment={downPayment}
+            interestRate={interestRate}
+          />
+          <Display
+            homePrice={homePrice}
+            state={this.state}
+            toggleModal={this.toggleModal}
+          />
+          {showModal && <LenderModal toggleModal={this.toggleModal} />}
+        </AppContainer>
+      </>
     );
   }
 }
