@@ -39,7 +39,7 @@ const InterestRate = ({
     if (val === null) {
       val = '';
     }
-    sliderRef.current.style.setProperty('--webkitProgressPercent', `${(val / max) * 100 - 4}%`);
+    sliderRef.current.style.setProperty('--webkitProgressPercent', `${(((val / (max * 1.05)) * 100))}%`);
     handleInterestChange(val);
     setValue(val);
   };

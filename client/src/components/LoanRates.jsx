@@ -39,16 +39,22 @@ const LowestRate = styled.div`
   left: 0;
 `;
 
-const LoanRates = ({ title, subTitle, lenders }) => {
+const LoanRates = ({ title, subTitle, lenders, type }) => {
 
   return (
     <RatesContainer>
       <LowestRate>Lowest APR ({subTitle})</LowestRate>
       <RatesHeader>{title}</RatesHeader>
-      {/* <Lender lender={lenders[0]} loan={lenders[0].offerings[0]} />
-      <Lender lender={lenders[1]} loan={lenders[0].offerings[0]} /> */}
-      <Lender />
-      <Lender />
+      <Lender
+        lender={lenders[0]}
+        loan={lenders[0].offerings[0]}
+        type={type}
+      />
+      <Lender
+        lender={lenders[3]}
+        loan={lenders[1].offerings[1]}
+        type={type}
+      />
     </RatesContainer>
   );
 };

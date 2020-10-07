@@ -20,9 +20,17 @@ const TopContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 25px;
+
+  h4 {
+    paddding: 0;
+    margin: 0;
+    line-height: 20px;
+  }
 `;
 
 const InputContainer = styled.div`
+  min-width: 156px;
+
   .money-input {
     width: 100px;
     border-width: 1px 0px 1px 1px;
@@ -83,7 +91,7 @@ const DownPayment = ({
       targetVal = numeral(pureVal).value();
     }
 
-    sliderRef.current.style.setProperty('--webkitProgressPercent', `${(targetVal / max) * 100 - 4}%`);
+    sliderRef.current.style.setProperty('--webkitProgressPercent', `${(((targetVal / (max * 1.05)) * 100))}%`);
     setValue(targetVal);
     handleDownPaymentChange(targetVal);
   };

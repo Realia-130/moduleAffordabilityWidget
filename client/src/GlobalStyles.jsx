@@ -61,7 +61,7 @@ const GlobalStyles = createGlobalStyle`
     margin: 0px;
     padding: 0px;
     cursor: default;
-    --webkitProgressPercent: 60%;
+    --webkitProgressPercent: 65%;
   }
 
   input[type=range]::-webkit-slider-runnable-track {
@@ -71,7 +71,7 @@ const GlobalStyles = createGlobalStyle`
     margin: 0px;
     padding: 0px;
     cursor: default;
-    background: linear-gradient(to right, rgb(0, 120, 130) 0%, rgb(0, 120, 130) var(--webkitProgressPercent), rgb(205, 209, 212) var(--webkitProgressPercent), rgb(205, 209, 212) 100%);
+    background: linear-gradient(to right, rgb(0, 120, 130) 0%, rgb(0, 120, 130) var(--webkitProgressPercent), rgb(205, 209, 212) var(--webkitProgressPercent), rgb(205, 209, 212) 94%);
   }
 
   input.range:focus {

@@ -79,26 +79,35 @@ const GreenLink = styled.span`
   font-weight: 100;
 `;
 
-const Lender = ({ loan, lender }) => {
-
-  console.log(loan);
-  console.log(lender);
+const Lender = ({ loan, lender, type }) => {
+  console.log('loan, ', loan);
+  console.log('lender ', lender);
+  const ratingTotal = lender.reviews.reduce((a, review) => a + review.rating, 0);
+  const ratingAverage = Math.floor(ratingTotal / lender.reviews.length);
+  console.log(ratingAverage);
 
   return (
     <LenderContainer>
       <LenderInfo>
-        <div>30 year fixed</div>
-        <div><GreenLink>Random Lender</GreenLink></div>
+        <div>{`${type} fixed`}</div>
+        <div><GreenLink>{lender.name}</GreenLink></div>
         <div>
-          <StarRating rating='3.9' />
-          1033 Reviews
+          <StarRating rating={ratingAverage} />
+          {`${lender.reviews.length} Reviews`}
         </div>
       </LenderInfo>
       <Quotes>
-        <div><span className="bold">2.921 %</span> APR</div>
-        <div><span className="bold">2.921 %</span> RATE</div>
-        <div><span className="bold">$706</span> <Tooltip>/MO.</Tooltip></div>
-        <div><span className="bold">$506</span> <Tooltip>LEENDER FEES</Tooltip></div>
+        <div><span className="bold">{`${loan.apr} %`}</span> APR</div>
+        <div><span className="bold">{`${loan.rate} %`}</span> RATE</div>
+        {/* <div><span className="bold">$706</span> <Tooltip>/MO.</Tooltip></div> */}
+        <div>
+          <span className="bold">
+            {`$${loan.fees}`}
+          </span>
+          <Tooltip>
+            LEENDER FEES
+          </Tooltip>
+        </div>
       </Quotes>
       <ArrowContainer>
         <Arrow />

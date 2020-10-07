@@ -9,7 +9,10 @@ const ChartContainer = styled.div`
   align-items: center;
   height: 280px;
   width: 280px;
+  max-width: 280px;
+  min-width:280px;
   margin: 0 20px;
+  flex-shrink: 0;
 `;
 
 const PaymentDisplay = styled.div`
@@ -38,7 +41,10 @@ const Chart = ({ state }) => {
 
   return (
     <ChartContainer>
-      <PaymentDisplay><h1>{`$${payment}`}</h1><div>/month</div></PaymentDisplay>
+      <PaymentDisplay>
+        <h1>{`$${payment}`}</h1>
+        <div>/month</div>
+      </PaymentDisplay>
       <svg width="100%" height="100%" viewBox="0 0 36 36">
         <circle cx="18" cy="18" r="15.91549430918952" fill="none" stroke="rgb(5, 34, 134)" strokeWidth="3.8" strokeDasharray={`${principleFill} ${100 - principleFill}`} strokeDashoffset="25" />
         <circle cx="18" cy="18" r="15.91549430918952" fill="none" stroke="rgb(0, 173, 187)" strokeWidth="3.8" strokeDasharray={`${propertyFill} ${100 - propertyFill}`} strokeDashoffset={propertyOffset} />

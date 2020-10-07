@@ -16,7 +16,9 @@ import {
 } from './utils/calculator.jsx';
 
 const AppContainer = styled.div`
+  margin: 0 auto;
   width: 100%;
+  max-width: 1000px;
   padding: 20px;
   display: flex;
   flex-flow: column nowrap;
