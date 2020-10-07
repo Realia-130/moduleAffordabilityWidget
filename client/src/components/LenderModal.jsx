@@ -50,19 +50,11 @@ const LenderModal = ({ toggleModal }) => {
 
   if (loading) return (<ModalBackground />);
 
-  const filterBy30Year = lenders.filter((lender) => {
-
-    return lender.offerings.terms === '30 Year Fixed'
-  });
-  console.log(filterBy30Year);
-
-  const filterBy15Year = lenders.filter((lender) => lender.offerings.terms === '15 Year Fixed');
-
   return (
     <ModalBackground onClick={toggleModal}>
       <LendersContainer onClick={handleClick}>
-        <LoanRates title="30 YEAR FIXED" subTitle="30yr" lenders={filterBy30Year} />
-        <LoanRates title="15 YEAR FIXED" subTitle="15yr" lenders={filterBy15Year} />
+        <LoanRates title="30 YEAR FIXED" subTitle="30yr" lenders={lenders} />
+        <LoanRates title="15 YEAR FIXED" subTitle="15yr" lenders={lenders} />
       </LendersContainer>
     </ModalBackground>
   );

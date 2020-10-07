@@ -40,7 +40,7 @@ const HomePrice = ({ homePrice, handlePriceChange }) => {
       targetVal = numeral(pureVal).value();
     }
 
-    sliderRef.current.style.setProperty('--webkitProgressPercent', `${(targetVal / max) * 97}%`);
+    sliderRef.current.style.setProperty('--webkitProgressPercent', `${(((targetVal / (max * 1.05)) * 100))}%`);
     setValue(targetVal);
     handlePriceChange(targetVal);
   };

@@ -21,8 +21,10 @@ const TopContainer = styled.div`
   align-items: center;
   margin-bottom: 25px;
 
-  @media (max-width: 924px) {
-    margin-bottom: 19px;
+  h4 {
+    paddding: 0;
+    margin: 0;
+    line-height: 20px;
   }
 `;
 
@@ -89,7 +91,7 @@ const DownPayment = ({
       targetVal = numeral(pureVal).value();
     }
 
-    sliderRef.current.style.setProperty('--webkitProgressPercent', `${(targetVal / max) * 100 - 4}%`);
+    sliderRef.current.style.setProperty('--webkitProgressPercent', `${(((targetVal / (max * 1.05)) * 100))}%`);
     setValue(targetVal);
     handleDownPaymentChange(targetVal);
   };

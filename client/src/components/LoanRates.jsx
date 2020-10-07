@@ -45,10 +45,10 @@ const LoanRates = ({ title, subTitle, lenders }) => {
     <RatesContainer>
       <LowestRate>Lowest APR ({subTitle})</LowestRate>
       <RatesHeader>{title}</RatesHeader>
-      {/* <Lender lender={lenders[0]} loan={lenders[0].offerings[0]} />
-      <Lender lender={lenders[1]} loan={lenders[0].offerings[0]} /> */}
-      <Lender />
-      <Lender />
+      <Lender lender={lenders[0]} loan={lenders[0].offerings[0]} />
+      <Lender lender={lenders[1]} loan={lenders[0].offerings[0]} />
+      {/* <Lender />
+      <Lender /> */}
     </RatesContainer>
   );
 };

@@ -81,8 +81,8 @@ const GreenLink = styled.span`
 
 const Lender = ({ loan, lender }) => {
 
-  console.log(loan);
-  console.log(lender);
+  console.log('loan, ', loan);
+  console.log('lender ', lender);
 
   return (
     <LenderContainer>
