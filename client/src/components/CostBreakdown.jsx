@@ -3,17 +3,26 @@ import styled from 'styled-components';
 import Cost from './Cost.jsx';
 
 const CostContainer = styled.div`
-  flex: 2;
+  flex-grow: 1;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: space-between;
-  padding: 16px 0px 16px 16px
+  padding: 16px 0px 16px 16px;
+
+  @media (max-width: 767px) {
+    padding: 16px;
+    width: 100%;
+  }
 `;
 
 const ButtonContainer = styled.div`
   margin-top: 40px;
   width: 300px;
+
+  @media (max-width: 767px) {
+    width: 100%;
+  }
 `;
 
 const CustomButton = styled.a`
